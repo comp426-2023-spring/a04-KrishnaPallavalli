@@ -1,12 +1,13 @@
 import minimist from 'minimist'
-import bodyParser from 'body-parser'
 const args = minimist(process.argv.slice(2))
 const port = args.port || 5000
 import { rps, rpsls } from './lib/rpsls.js'
 import express from 'express'
 var app = express()
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
 app.get('/app', (req, res, next) => {
     res.status(200).send("200 OK")
 })
@@ -19,22 +20,18 @@ app.get('/app/rpsls', (req, res, next) => {
 app.post('/app/rps/play', (req, res, next) => {
     res.status(200).send(rps(req.body.shot()))
 })
-
 app.post('/app/rps/play', (req, res, next) => {
     res.status(200).send(rps(req.query.shot()))
 })
-
 app.get('/app/rps/play/:shot', (req, res, next) => {
     res.status(200).send(rps(req.params.shot))
 })
 app.post('/app/rpsls/play', (req, res, next) => {
     res.status(200).send(rpsls(req.body.shot))
 })
-
 app.post('/app/rpsls/play', (req, res, next) => {
     res.status(200).send(rpsls(req.query.shot))
 })
-
 app.get('/app/rpsls/play/:shot', (req, res, next) => {
     res.status(200).send(rps(req.params.shot))
 })
