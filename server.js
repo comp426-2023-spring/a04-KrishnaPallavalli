@@ -13,23 +13,21 @@ app.get('/app/rps', (req, res, next) => {
 app.get('/app/rpsls', (req, res, next) => {
     res.status(200).type('json').send(rpsls())
 })
-
 app.post('/app/rps/play', (req, res, next) => {
     res.status(200).type('json').send(rps(req.body.shot()))
 })
-
 app.get('/app/rps/play/:shot', (req, res, next) => {
     res.status(200).type('json').send(rps(req.params.shot))
 })
-
 app.post('/app/rpsls/play', (req, res, next) => {
     res.status(200).type('json').send(rpsls(req.body.shot))
 })
-
 app.get('/app/rpsls/play/:shot', (req, res, next) => {
     res.status(200).type('json').send(rps(req.params.shot))
 })
+
 app.get('*', (req, res, next) => {
-    res.status(400).type('txt').send('404 NOT FOUND')
+    res.status(404).type('txt').send('404 NOT FOUND')
 })
+
 app.listen(port)
